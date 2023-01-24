@@ -1,4 +1,7 @@
+import * as cors from 'cors';
 import * as express from 'express';
+import { checkLogin, login } from './database/controllers/loginController';
+import validLogin from './database/middlewares/login';
 
 class App {
   public app: express.Express;
@@ -7,9 +10,23 @@ class App {
     this.app = express();
 
     this.config();
+    this.routes();
 
     // Não remover essa rota
     this.app.get('/', (req, res) => res.json({ ok: true }));
+  }
+
+  public routes() {
+    this.getHttp();
+    this.postHttp();
+  }
+
+  public getHttp() {
+    this.app.get('/login/validate', checkLogin);
+  }
+
+  public postHttp() {
+    this.app.post('/login', validLogin, login);
   }
 
   private config():void {
@@ -22,6 +39,7 @@ class App {
 
     this.app.use(express.json());
     this.app.use(accessControl);
+    this.app.use(cors());
   }
 
   public start(PORT: string | number):void {
