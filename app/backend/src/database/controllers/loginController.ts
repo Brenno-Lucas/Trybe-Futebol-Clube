@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { compare } from 'bcryptjs';
 import 'dotenv/config';
 import { sign } from 'jsonwebtoken';
-import loginService from '../sevices/loginService';
+import loginService from '../services/loginService';
 import validtoken from '../../auth/auth';
 
 const secret = process.env.JWT_SECRET || 'secret';

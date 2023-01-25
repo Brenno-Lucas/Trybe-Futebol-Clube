@@ -2,6 +2,7 @@ import * as cors from 'cors';
 import * as express from 'express';
 import { checkLogin, login } from './database/controllers/loginController';
 import validLogin from './database/middlewares/login';
+import { getById, getAll } from './database/controllers/teamController';
 
 class App {
   public app: express.Express;
@@ -23,6 +24,8 @@ class App {
 
   public getHttp() {
     this.app.get('/login/validate', checkLogin);
+    this.app.get('/teams', getAll);
+    this.app.get('/teams/:id', getById);
   }
 
   public postHttp() {

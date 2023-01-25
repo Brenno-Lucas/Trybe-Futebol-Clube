@@ -3,5 +3,5 @@ export const mock = {
   username: 'test',
   role: 'test',
   email: 'test@test.com',
-  password: 'test123'
+  password: 'test123',
 };

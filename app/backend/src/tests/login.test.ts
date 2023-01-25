@@ -5,14 +5,15 @@ import chaiHttp = require('chai-http');
 import { app } from '../app';
 import { Response } from 'superagent';
 import UsersModel from '../database/models/usersModel';
-import { mock } from './mocks/LoginMock';
+import { mock } from './mocks/loginMock';
 
 chai.use(chaiHttp);
 const tokenMock = {
-  token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc0MzA4NTQ5fQ.oEaGiJBRFsgBdfPhGRz-PHnQYd4Pd9Nj0AvUv0-LjwM",
+  token: "eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoidGVzdCIsIklzc3VlciI6Iklzc3VlciIsIlVzZXJuYW1lIjoidGVzdCIsImlhdCI6MTY3NDY1NTU1Nn0.ln-zrmnRKcqURQBpyNfA_KDcpBdx4KAkVkGknu-Bnqw",
  };
 const mockSucess = mock;
 const { expect } = chai;
+
 describe('Login tests.', () => {
   let response: Response;
 
@@ -35,7 +36,7 @@ describe('Login tests.', () => {
       expect(response.body).to.deep.equal({ message: "All fields must be filled" });
   });
 
-  it('Test the email field filled in wrong.', async () => {
+  it('Tests email field filled in wrong.', async () => {
     response = await chai
       .request(app).post('/login')
       .send({
@@ -73,6 +74,7 @@ describe('Login tests.', () => {
       });
       expect(response.body).to.deep.equal({ message: "All fields must be filled" });
   });
+  
 
   it('Tests fields filled incorrect, without return.', async () => {
     response = await chai
