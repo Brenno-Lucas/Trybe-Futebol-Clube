@@ -45,7 +45,15 @@ MatchesModel.init({
   timestamps: false,
 });
 
-MatchesModel.hasMany(TeamsModel, { foreignKey: 'home_team_id', as: 'home_team' });
-MatchesModel.hasMany(TeamsModel, { foreignKey: 'away_team_id', as: 'away_team' });
+export const HomeTeams = MatchesModel
+  .belongsTo(TeamsModel, {
+    foreignKey: 'homeTeamId',
+    as: 'homeTeam',
+  });
+export const AwayTeams = MatchesModel
+  .belongsTo(TeamsModel, {
+    foreignKey: 'awayTeamId',
+    as: 'awayTeam',
+  });
 
 export default MatchesModel;

@@ -21,7 +21,7 @@ const getById = async (req: Request, res: Response) => {
   }
 };
 
-export {
+export default {
   getAll,
   getById,
 };

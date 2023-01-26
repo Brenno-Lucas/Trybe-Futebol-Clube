@@ -12,7 +12,7 @@ const validToken = (req: Request): PayloadI => {
     const result = verify(token, secret);
     return result as PayloadI;
   } catch (error) {
-    return { ok: true };
+    return { ok: true, message: 'Token must be a valid token' };
   }
 };
 export default validToken;

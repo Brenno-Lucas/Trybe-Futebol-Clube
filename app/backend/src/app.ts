@@ -1,8 +1,10 @@
 import * as cors from 'cors';
 import * as express from 'express';
 import { checkLogin, login } from './database/controllers/loginController';
+import matchController from './database/controllers/matchController';
 import validLogin from './database/middlewares/login';
-import { getById, getAll } from './database/controllers/teamController';
+import validMatch from './database/middlewares/match';
+import teamController from './database/controllers/teamController';
 
 class App {
   public app: express.Express;
@@ -20,16 +22,23 @@ class App {
   public routes() {
     this.getHttp();
     this.postHttp();
+    this.patchHttp();
   }
 
   public getHttp() {
     this.app.get('/login/validate', checkLogin);
-    this.app.get('/teams', getAll);
-    this.app.get('/teams/:id', getById);
+    this.app.get('/matches/?', matchController.getInProgress, matchController.getAll);
+    this.app.get('/teams', teamController.getAll);
+    this.app.get('/teams/:id', teamController.getById);
   }
 
   public postHttp() {
     this.app.post('/login', validLogin, login);
+    this.app.post('/matches', validMatch, matchController.createMatchInprogress);
+  }
+
+  public patchHttp() {
+    this.app.patch('/matches/:id/finish', matchController.updateProgress);
   }
 
   private config():void {
