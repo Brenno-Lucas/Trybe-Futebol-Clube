@@ -1,7 +1,7 @@
 import MatchesModel, { AwayTeams, HomeTeams } from '../models/matchesModel';
-import IFieldsMatch from '../../interfaces/MatchsI';
+import MatchsI from '../../interfaces/MatchsI';
 
-const createMatchInprogress = async (infos: IFieldsMatch) => {
+const createMatchInprogress = async (infos: MatchsI) => {
   const info = { ...infos, inProgress: 1 };
   const result = await MatchesModel.create(info);
   return result;
@@ -35,10 +35,24 @@ const updateProgress = async (id: number) => {
   await MatchesModel.update({ inProgress: 0 }, { where: { id } });
 };
 
+type goals = {
+  homeTeamGoals: number;
+  awayTeamGoals: number;
+};
+
+const updateScore = async (id: number, body: goals) => {
+  const { homeTeamGoals, awayTeamGoals } = body;
+  await MatchesModel.update(
+    { homeTeamGoals, awayTeamGoals },
+    { where: { id } },
+  );
+};
+
 export default {
   createMatchInprogress,
   getAll,
   getById,
   getInProgress,
   updateProgress,
+  updateScore,
 };

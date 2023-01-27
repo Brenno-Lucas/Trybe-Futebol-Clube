@@ -1,10 +1,11 @@
 import * as cors from 'cors';
 import * as express from 'express';
 import { checkLogin, login } from './database/controllers/loginController';
+import leaderboardController from './database/controllers/leaderBoardController';
 import matchController from './database/controllers/matchController';
+import teamController from './database/controllers/teamController';
 import validLogin from './database/middlewares/login';
 import validMatch from './database/middlewares/match';
-import teamController from './database/controllers/teamController';
 
 class App {
   public app: express.Express;
@@ -26,6 +27,8 @@ class App {
   }
 
   public getHttp() {
+    this.app.get('/leaderboard', leaderboardController.getLeaderBoard);
+    this.app.get('/leaderboard/home', leaderboardController.getLeaderBoardHome);
     this.app.get('/login/validate', checkLogin);
     this.app.get('/matches/?', matchController.getInProgress, matchController.getAll);
     this.app.get('/teams', teamController.getAll);
@@ -38,6 +41,7 @@ class App {
   }
 
   public patchHttp() {
+    this.app.patch('/matches/:id', matchController.updateScore);
     this.app.patch('/matches/:id/finish', matchController.updateProgress);
   }
 
