@@ -1,10 +1,15 @@
-# :construction: README em construção ! :construction:
-<!-- Olá, Tryber!
-Esse é apenas um arquivo inicial para o README do seu projeto.
-É essencial que você preencha esse documento por conta própria, ok?
-Não deixe de usar nossas dicas de escrita de README de projetos, e deixe sua criatividade brilhar!
-:warning: IMPORTANTE: você precisa deixar nítido:
-- quais arquivos/pastas foram desenvolvidos por você; 
-- quais arquivos/pastas foram desenvolvidos por outra pessoa estudante;
-- quais arquivos/pastas foram desenvolvidos pela Trybe.
--->
+# Trybe Futebol Clube
+
+O Trybe Futebol Clube (TFC) é um site informativo dedicado a partidas e classificações de futebol! Ele fornece uma aplicação completa e integrada, consumindo um banco de dados e oferecendo uma API REST para ser consumida pelo front-end.
+
+## Tecnologias Utilizadas
+
+- Node.js,
+- TypeScript,
+- Express,
+- Sequelize,
+- Docker e Docker Compose,
+- JWT (JSON Web Tokens),
+- Mocha, Chai e Sinon (testes unitários),
+- ESLint, Airbnb Style Guide e SonarJS (padronização de código),
+- MySQL.
